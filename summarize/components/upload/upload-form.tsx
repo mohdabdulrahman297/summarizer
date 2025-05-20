@@ -6,6 +6,7 @@ import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { useUploadThing } from "@/utils/uploadthing";
 import { toast } from "sonner";
+import { generatePdfSummary } from "@/actions/upload-actions";
 
 const schema = z.object({
   file:
@@ -43,11 +44,14 @@ export default function UploadForm() {
           throw new Error("Failed to upload file");
         }
 
+        const summary = await generatePdfSummary(resp);
+        console.log({summary});
+
         // 3) (Optional) further processing, e.g. summarization, DB save, redirect...
       },
       {
         loading: "Processing & uploading file…",
-        
+
         success: "File uploaded successfully!",
         error: (err) => `Error: ${err.message}`,
       }
@@ -56,7 +60,7 @@ export default function UploadForm() {
 
   return (
     <div className="flex flex-col gap-8 w-full max-w-2xl">
-      <UploadFormInput onSubmit={handleSubmit} />
+      <UploadFormInput onSubmitAction={handleSubmit} />
     </div>
   );
 }
