@@ -6,7 +6,8 @@ import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { useUploadThing } from "@/utils/uploadthing";
 import { toast } from "sonner";
-import { generatePdfSummary } from "@/actions/upload-actions";
+import { generatePdfSummary, storePdfSummaryAction } from "@/actions/upload-actions";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   file:
@@ -21,6 +22,8 @@ const schema = z.object({
 
 export default function UploadForm() {
   const { startUpload } = useUploadThing("pdfUploader");
+  const formRef = React.useRef<HTMLFormElement | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,8 +47,22 @@ export default function UploadForm() {
           throw new Error("Failed to upload file");
         }
 
-        const summary = await generatePdfSummary(resp);
-        console.log({summary});
+        const result = await generatePdfSummary(resp);
+
+        const {data = null, message = null} = result || {};
+
+       if(data.summary){
+      const storeResult = await storePdfSummaryAction({
+        summary: data.summary,
+            fileUrl: resp[0].serverData.file.url,
+            title: data.title,
+            fileName: file.name,
+        });
+
+        toast.success("Summary saved successfully to database");
+        formRef.current?.reset();
+        router.push(`/summaries/${storeResult.id}`); // Redirect to the summary page
+       }
 
         // 3) (Optional) further processing, e.g. summarization, DB save, redirect...
       },
@@ -60,7 +77,7 @@ export default function UploadForm() {
 
   return (
     <div className="flex flex-col gap-8 w-full max-w-2xl">
-      <UploadFormInput onSubmitAction={handleSubmit} />
+      <UploadFormInput onSubmitAction={handleSubmit} formRef={formRef} />
     </div>
   );
 }
