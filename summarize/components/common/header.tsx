@@ -20,8 +20,9 @@ export default function Header() {
       {/* Middle section - Navigation */}
       <div className="flex justify-center flex-1 gap-4 lg:gap-12 items-center">
         <NavLink href="#pricing">Pricing</NavLink>
+
         <SignedIn>
-          
+          <NavLink href="/dashboard">Your Summaries</NavLink>
         </SignedIn>
       </div>
 
@@ -31,16 +32,13 @@ export default function Header() {
           <div className="flex gap-2 items-center">
             <NavLink href="/upload">Upload a pdf</NavLink>
             <div>Pro</div>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            <UserButton />
           </div>
         </SignedIn>
 
-         <SignedOut>
-            <NavLink href="/sign-in">Sign In</NavLink>
-          </SignedOut>
-
+        <SignedOut>
+          <NavLink href="/sign-in">Sign In</NavLink>
+        </SignedOut>
       </div>
     </nav>
   );

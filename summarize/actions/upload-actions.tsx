@@ -113,21 +113,17 @@ async function savePdfSummary({
   title,
   fileName,
 }: pdfSummaryType) {
-  // sql insert
-  // getDbConnection
-  // sql insert
-  // return success
-
   try {
     const sql = await getDbConnection();
-    await sql`INSERT INTO pdf_summaries (user_id, orignal_file_url, summary_text, title, file_name)
-VALUES (
-   ${userId},
-   ${fileUrl},
-   ${summary},
-   ${title},
-   ${fileName}
-);`;
+    const [savedSummary] = await sql`INSERT INTO pdf_summaries (user_id, orignal_file_url, summary_text, title, file_name)
+    VALUES (
+       ${userId},
+       ${fileUrl},
+       ${summary},
+       ${title},
+       ${fileName}
+    ) RETURNING id;`;
+    return savedSummary;
   } catch (error) {
     console.error("Error saving PDF summary", error);
     throw error;
