@@ -3,6 +3,13 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { NavigationControls } from "./navigation-controls";
+import ProgressBar from "./progress-bar";
+
+const SectionTitle = ({ title }: { title: string }) => (
+    <div>
+    <h2 className="text-xl font-semibold mb-4">{title}</h2>
+    </div>
+);
 
 const parseSection = (section: string) => {
   const [title, content] = section.split("\n");
@@ -32,10 +39,6 @@ const parseSection = (section: string) => {
     title: cleanTitle,
     points: points.filter((point) => point && !point.startsWith("[Choose")),
   };
-  return {
-    title: cleanTitle,
-    content: content.trim(),
-  };
 };
 
 export function SummaryViewer({ summary }: { summary: string }) {
@@ -59,6 +62,7 @@ export function SummaryViewer({ summary }: { summary: string }) {
   backdrop-blur-lg shadow-2xl rounded-3xl
   border border-blue-500/10"
     >
+        <ProgressBar sections={sections} currentSection={curr} />
       <div className="h-full overflow-y-auto scrollbar-hide pt-12 sm:pt-16 pb-20 sm:pb-24">
         <div className="px-4 sm:px-6">
           <h2 className="text-xl font-semibold mb-4">

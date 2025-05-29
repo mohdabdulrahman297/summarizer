@@ -12,22 +12,28 @@ export default function SummaryHeader({
   readingTime: string;
 }) {
   return (
-    <div className="flex gap-4 mb-4 items-center justify-between">
+    <div className="flex flex-col sm:flex-row gap-4 mb-4 items-center justify-between">
       {/* Added items-center for vertical alignment */}
       <div className="space-y-10">
-        <div className="inline-flex items-center text-blue-500 mt-6 px-4 py-2">
+        <div className="inline-flex flex-wrap items-center text-blue-500 mt-6 px-4 py-2">
           <Button className="px-6 text-blue-700 border border-blue-300 rounded-full hover:shadow-md hover:bg-white cursor-pointer bg-white">
             <Sparkles className="h-4 w-4 mr-1.5 text-blue-500" />
             <span className="text-blue-700">AI summary</span>
           </Button>
-          <Calendar className="h-4 w-4 ml-5" />
-          {new Date(createdAt).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-          <Clock className="h-4 w-4 ml-5 mr-1 text-blue-500" />
-          {readingTime} min read
+          <div className="flex items-center mt-2 sm:mt-0">
+            <Calendar className="h-4 w-4 ml-5" />
+            <span className="text-sm sm:text-base ml-1">
+              {new Date(createdAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
+          </div>
+          <div className="flex items-center mt-2 sm:mt-0">
+            <Clock className="h-4 w-4 ml-5 mr-1 text-blue-500" />
+            <span className="text-sm sm:text-base">{readingTime} min read</span>
+          </div>
         </div>
       </div>
       <div>
@@ -42,7 +48,6 @@ export default function SummaryHeader({
           </Button>
         </Link>
       </div>
-      
     </div>
   );
 }

@@ -11,7 +11,8 @@ export default async function SummaryPage(props: {
 }) {
   const params = await props.params;
   const id = params.id;
-  const summary = await getSummaryId(id);
+  const cleanId = decodeURIComponent(params.id).replace(/[^\w-]/g, "");
+  const summary = await getSummaryId(cleanId);
   if (!summary) {
     notFound();
   }
@@ -61,7 +62,7 @@ export default async function SummaryPage(props: {
           text-muted-foreground bg-white/90 px-2 sm:px-3
           py-1 sm:py-1.5 rounded-full shadow-xs"
               >
-                <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-rose-400" />
+                <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-blue-500" />
                 {word_count?.toLocaleString()} words
               </div>
 
