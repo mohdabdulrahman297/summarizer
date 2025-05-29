@@ -122,7 +122,7 @@ async function savePdfSummary({
        ${summary},
        ${title},
        ${fileName}
-    ) RETURNING id;`;
+    ) RETURNING id, summary_text;`;
     return savedSummary;
   } catch (error) {
     console.error("Error saving PDF summary", error);
