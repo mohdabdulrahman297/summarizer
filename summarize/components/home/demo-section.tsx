@@ -1,4 +1,23 @@
 import { Pizza } from "lucide-react";
+import { SummaryViewer } from "../summaries/summary-viewer";
+import { MotionDiv, MotionH3 } from "../common/motion-wrapper";
+
+const DEMO_SUMMARY = `# Sample PDF Summary
+This summary provides a clear and concise overview of a sample PDF document. It distills the essential information to help readers quickly grasp the key themes and insights without reading the full document.
+
+## Key Highlights
+- Focuses on the role of strategic communication in professional settings.
+- Covers techniques for crafting impactful messages across different platforms.
+- Emphasizes clarity, brevity, and audience awareness in business writing.
+- Identifies common communication barriers and how to overcome them.
+- Provides actionable tips to improve collaboration through better messaging.
+
+## Summary Insights
+The document underscores the necessity of communication as a core business skill. It explains how targeted messaging improves teamwork, decision-making, and customer relations. It also outlines methods for evaluating the effectiveness of communication strategies.
+
+## Conclusion
+This summary captures the essence of the original PDF, highlighting the importance of communication in achieving organizational goals. By focusing on key points and actionable insights, it offers a fast-track understanding of the content’s value.`;
+
 
 export default function DemoSection() {
     return (
@@ -21,15 +40,23 @@ export default function DemoSection() {
             <Pizza className="w-6 h-6 text-blue-500" />
             </div>
             <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold max-w-2xl mx-auto px-4 sm:px-6">
+            <MotionH3
+              className="text-3xl font-bold max-w-2xl mx-auto px-4 sm:px-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}>
                 Watch how it converts a PDF into a{' '}
                 <span className="bg-linear-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">consice summary</span>{' '}
-            </h3>
+            </MotionH3>
             </div>
             <p className="text-gray-600">
                 This is a demo of Summarize. It is a simple demo that
                 converts a PDF into a consice summary.
             </p>
+            <MotionDiv initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}>
+              <SummaryViewer summary={DEMO_SUMMARY}/>
+            </MotionDiv>
         </div>
         </div>
       </section>
