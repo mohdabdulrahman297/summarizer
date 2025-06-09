@@ -5,6 +5,7 @@ import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
+import { ORIGIN_URL } from "@/utils/helpers";
 const fontSans = FontSans({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -16,6 +17,20 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   title: "Summarize",
   description: "AI saas app to summarize articles",
+  openGraph: {
+    images: [
+      {
+        url: "/cover.png",
+        width: 1200,
+        height: 630,
+        alt: "Summarize App Preview",
+      },
+    ],
+  },
+  metadataBase: new URL(ORIGIN_URL),
+  alternates: {
+    canonical: ORIGIN_URL,
+  },
 };
 
 export default function RootLayout({
