@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import { Download } from "lucide-react";
 
 export function DownloadButtonSummary({
@@ -24,19 +24,18 @@ export function DownloadButtonSummary({
             }
         `;
 
-        const blob = new Blob([summaryContent], { type: "text/plain" });
+    const blob = new Blob([summaryContent], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `Summary-${title?.replace(/[^a-z0-9]/gi,' ')}.txt`;
+    link.download = `Summary-${title?.replace(/[^a-z0-9]/gi, " ")}.txt`;
     document.body.appendChild(link); // Append link to the body
     link.click();
     document.body.removeChild(link);
     // Clean up the URL object after download
 
     URL.revokeObjectURL(url);
-
-};
+  };
 
   return (
     <Button
