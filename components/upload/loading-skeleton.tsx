@@ -1,7 +1,7 @@
-import React from 'react';
-import { Skeleton } from '../ui/skeleton';
-import { Card } from '../ui/card';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { Skeleton } from "../ui/skeleton";
+import { Card } from "../ui/card";
+import { cn } from "../../lib/utils";
 
 export default function LoadingSkeleton() {
   return (
@@ -15,8 +15,8 @@ export default function LoadingSkeleton() {
             >
               <div
                 className={cn(
-                  'h-full animate-pulse bg-linear-to-r from-gray-500 to-blue-600',
-                  index === 0 ? 'w-full' : 'w-0'
+                  "h-full animate-pulse bg-linear-to-r from-gray-500 to-blue-600",
+                  index === 0 ? "w-full" : "w-0"
                 )}
               />
             </div>
