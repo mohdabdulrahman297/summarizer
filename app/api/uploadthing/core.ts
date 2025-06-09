@@ -1,4 +1,4 @@
-import { currentUser } from "../../../node_modules/@clerk/nextjs/dist/types/server";
+import { currentUser } from "@clerk/nextjs/server";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 

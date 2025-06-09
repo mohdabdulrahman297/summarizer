@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import { Badge, Calendar, ChevronLeft, Clock, Sparkles } from "lucide-react";
 
 export default function SummaryHeader({
