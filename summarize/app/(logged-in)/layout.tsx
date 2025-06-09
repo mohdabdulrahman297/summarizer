@@ -1,6 +1,6 @@
 import UpgradeRequired from "@/components/common/upgrade-required";
 import { getSubscriptionStatus, hasActivePlan } from "@/lib/user";
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@/node_modules/@clerk/nextjs/dist/types/server";
 import { redirect } from "next/navigation";
 
 export default async function Layout({

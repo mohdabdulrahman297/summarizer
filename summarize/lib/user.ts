@@ -1,7 +1,7 @@
 import { PricingPlans } from "@/utils/constraints";
 import { getDbConnection } from "./db";
 import { getUserUploadCount } from "./summary";
-import { User } from "@clerk/nextjs/server";
+import { User } from "@/node_modules/@clerk/nextjs/dist/types/server";
 
 export async function getPriceIdForActiveUser(email: string) {
   const sql  = await getDbConnection();

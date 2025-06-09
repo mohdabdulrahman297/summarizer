@@ -2,7 +2,7 @@ import React from "react";
 import { FileText } from "lucide-react";
 import { Button } from "../ui/button";
 import NavLink from "./nav-link";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@/node_modules/@clerk/nextjs/dist/types";
 import PlanBadge from "./plan-badge";
 
 export default function Header() {

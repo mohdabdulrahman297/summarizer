@@ -1,4 +1,4 @@
-import { OpenAI } from "openai";
+import { OpenAI } from "openai/index.js";
 import { SUMMARY_SYSTEM_PROMPT } from "./prompts";
 
 const apiKey = process.env.OPENAI_API_KEY;

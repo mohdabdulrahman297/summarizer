@@ -5,7 +5,7 @@ import { generateSummaryFromGemini } from "@/lib/geminiai";
 import { fetchAndExtractPdfText } from "@/lib/langchain";
 import { generateSummaryFromOpenAI } from "@/lib/openai";
 import { formatFilenameAsTitle } from "@/utils/format-utils";
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@/node_modules/@clerk/nextjs/dist/types/server";
 import { revalidatePath } from "next/cache";
 
 interface pdfSummaryType {

@@ -2,7 +2,7 @@
 import { getPriceIdForActiveUser } from "@/lib/user";
 import { cn } from "@/lib/utils";
 import { PricingPlans } from "@/utils/constraints";
-import { currentUser } from "@clerk/nextjs/server"
+import { currentUser } from "@/node_modules/@clerk/nextjs/dist/types/server"
 import { Badge, Crown } from "lucide-react";
 import { Button } from "../ui/button";
 

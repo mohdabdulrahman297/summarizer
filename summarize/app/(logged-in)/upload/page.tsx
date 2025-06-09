@@ -4,7 +4,7 @@ import React from 'react';
 import BgGradient from '@/components/common/bg-gradient';
 import UploadHeader from '@/components/upload/upload-header';
 import UploadForm from '@/components/upload/upload-form';
-import { currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@/node_modules/@clerk/nextjs/dist/types/server';
 import { redirect } from 'next/navigation';
 import { hasReachedUploadLimit } from '@/lib/user';
 

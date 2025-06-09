@@ -4,7 +4,7 @@ import SummaryCard from "@/components/summaries/summary-card";
 import { Button } from "@/components/ui/button";
 import { getSummaries } from "@/lib/summary";
 import { hasReachedUploadLimit } from "@/lib/user";
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@/node_modules/@clerk/nextjs/dist/types/server";
 import { ArrowRight, Plus } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";

@@ -3,7 +3,7 @@ import { Source_Sans_3 as FontSans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider } from "@/node_modules/@clerk/nextjs/dist/types";
 import { Toaster } from "@/components/ui/sonner";
 import { ORIGIN_URL } from "@/utils/helpers";
 const fontSans = FontSans({
