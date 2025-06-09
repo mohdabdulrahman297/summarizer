@@ -9,42 +9,21 @@ import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 interface pdfSummaryType {
-  userId: string;
+  userId?: string;
   fileUrl: string;
   summary: string;
   title: string;
   fileName: string;
 }
 
-export async function generatePdfSummary(
-  uploadResponse: [
-    {
-      serverData: {
-        userId: string;
-        file: {
-          url: string;
-          name: string;
-        };
-      };
-    }
-  ]
-) {
-  if (!uploadResponse) {
-    return {
-      success: false,
-      message: "file upload failed",
-      data: null,
-    };
-  }
-
-  const {
-    serverData: {
-      userId,
-      file: { url: pdfUrl, name: fileName },
-    },
-  } = uploadResponse[0];
-
-  if (!pdfUrl) {
+export async function generatePdfSummary({
+  fileUrl,
+  fileName,
+}: {
+  fileUrl: string;
+  fileName: string;
+}) {
+  if (!fileUrl) {
     return {
       success: false,
       message: "file upload failed",
@@ -53,7 +32,7 @@ export async function generatePdfSummary(
   }
 
   try {
-    const pdfText = await fetchAndExtractPdfText(pdfUrl);
+    const pdfText = await fetchAndExtractPdfText(fileUrl);
     console.log({ pdfText });
 
     let summary;
@@ -178,7 +157,9 @@ export async function storePdfSummaryAction({
   return {
     success: true,
     message: "PDF summary saved successfully",
-    data: savedSummary,
-    id: savedSummary.id,
+    data: {
+      id: savedSummary.id,
+    },
   };
 }
+

@@ -1,20 +1,50 @@
-"use client";
+'use client';
 
-import React from 'react'
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
+import { Loader2Icon } from 'lucide-react';
+import React, { FormEvent, RefObject } from 'react';
 
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
 interface UploadFormInputProps {
-    onSubmitAction: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  isLoading: boolean;
+  ref: RefObject<HTMLFormElement>;
 }
 
-export default function UploadFormInput({onSubmitAction}: UploadFormInputProps) {
-  return (
-    <form className='flex flex-col gap-6' onSubmit={onSubmitAction}>
-    <div className='flex justify-end items-center gap-2'>
-    <Input id='file' name='file' accept='application/pdf' required type='file' className='' />
-    <Button>Upload your PDF</Button>
-    </div>
-  </form>
-  )
-}
+const UploadFormInput = React.forwardRef<HTMLFormElement, Omit<UploadFormInputProps, 'ref'>>(
+  ({ onSubmit, isLoading }, ref) => {
+    return (
+      <form ref={ref} className="flex flex-col gap-6" onSubmit={onSubmit}>
+        <div className="flex items-center justify-end gap-1.5">
+          <Input
+            type="file"
+            id="file"
+            name="file"
+            accept="application/pdf"
+            required
+            className={cn(isLoading && 'cursor-not-allowed opacity-50')}
+            disabled={isLoading}
+          />
+          <Button
+            disabled={isLoading}
+            className="bg-blue-600 hover:cursor-pointer hover:bg-blue-700"
+          >
+            {isLoading ? (
+              <>
+                <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
+                Processing...
+              </>
+            ) : (
+              'Upload Your Pdf'
+            )}
+          </Button>
+        </div>
+      </form>
+    );
+  }
+);
+
+UploadFormInput.displayName = 'UploadFormInput';
+
+export default UploadFormInput;
